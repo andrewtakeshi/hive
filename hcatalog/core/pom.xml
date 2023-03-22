@@ -60,7 +60,7 @@
       <artifactId>hive-exec</artifactId>
       <version>${project.version}</version>
     </dependency>
-    <dependency>
+    <!-- <dependency>
       <groupId>org.apache.hive</groupId>
       <artifactId>hive-exec</artifactId>
       <version>${project.version}</version>
@@ -80,7 +80,7 @@
           <artifactId>avatica</artifactId>
         </exclusion>
       </exclusions>
-    </dependency>
+    </dependency> -->
     <!-- inter-project -->
     <dependency>
       <groupId>com.google.guava</groupId>

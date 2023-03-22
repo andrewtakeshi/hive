@@ -13,8 +13,8 @@
   limitations under the License.
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.apache.hive</groupId>
@@ -70,23 +70,23 @@
       <groupId>net.sf.jpam</groupId>
       <artifactId>jpam</artifactId>
       <version>${jpam.version}</version>
-            <exclusions>
-            <exclusion>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-log4j12</artifactId>
-          </exclusion>
-          <exclusion>
-            <groupId>commmons-logging</groupId>
-            <artifactId>commons-logging</artifactId>
-          </exclusion>
-        </exclusions>
-   </dependency>
+      <exclusions>
+        <exclusion>
+          <groupId>org.slf4j</groupId>
+          <artifactId>slf4j-log4j12</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>commmons-logging</groupId>
+          <artifactId>commons-logging</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
     <dependency>
       <groupId>com.lmax</groupId>
       <artifactId>disruptor</artifactId>
       <version>${disruptor.version}</version>
     </dependency>
-   <!-- used by thrift generated code -->
+    <!-- used by thrift generated code -->
     <dependency>
       <groupId>commons-lang</groupId>
       <artifactId>commons-lang</artifactId>
@@ -95,7 +95,7 @@
     <dependency>
       <groupId>org.eclipse.jetty.aggregate</groupId>
       <artifactId>jetty-all</artifactId>
-        <version>${jetty.version}</version>
+      <version>${jetty.version}</version>
     </dependency>
     <dependency>
       <groupId>tomcat</groupId>
@@ -145,8 +145,8 @@
       <version>${jamon-runtime.version}</version>
     </dependency>
 
-      <!-- intra-project -->
-    <dependency>
+    <!-- intra-project -->
+    <!-- <dependency>
       <groupId>org.apache.hive</groupId>
       <artifactId>hive-exec</artifactId>
       <version>${project.version}</version>
@@ -166,14 +166,14 @@
           <artifactId>avatica</artifactId>
         </exclusion>
       </exclusions>
+    </dependency> -->
+    <dependency>
+      <groupId>org.apache.hive</groupId>
+      <artifactId>hive-common</artifactId>
+      <version>${project.version}</version>
+      <scope>test</scope>
+      <type>test-jar</type>
     </dependency>
-      <dependency>
-        <groupId>org.apache.hive</groupId>
-        <artifactId>hive-common</artifactId>
-        <version>${project.version}</version>
-        <scope>test</scope>
-        <type>test-jar</type>
-      </dependency>
     <!-- test inter-project -->
     <dependency>
       <groupId>junit</groupId>
@@ -201,6 +201,12 @@
       <artifactId>apacheds-server-integ</artifactId>
       <version>${apache-directory-server.version}</version>
       <scope>test</scope>
+      <exclusions>
+        <exclusion>
+          <groupId>org.apache.directory.client.ldap</groupId>
+          <artifactId>ldap-client-api</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
 
     <dependency>
@@ -251,25 +257,25 @@
             <configuration>
               <target>
                 <property name="build.webapps"
-                  location="${project.build.directory}/hive-webapps"/>
+                  location="${project.build.directory}/hive-webapps" />
                 <property name="src.webapps"
-                  location="${basedir}/src/resources/hive-webapps"/>
+                  location="${basedir}/src/resources/hive-webapps" />
                 <property name="generated.sources"
-                  location="${project.build.directory}/generated-sources"/>
-                <mkdir dir="${build.webapps}"/>
+                  location="${project.build.directory}/generated-sources" />
+                <mkdir dir="${build.webapps}" />
                 <copy todir="${build.webapps}">
                   <fileset dir="${src.webapps}">
-                    <exclude name="**/*.jsp"/>
-                    <exclude name="**/.*"/>
+                    <exclude name="**/*.jsp" />
+                    <exclude name="**/.*" />
                   </fileset>
                 </copy>
                 <taskdef classname="org.apache.jasper.JspC"
-                  name="jspcompiler" classpathref="maven.compile.classpath"/>
-                <mkdir dir="${build.webapps}/hiveserver2/WEB-INF"/>
+                  name="jspcompiler" classpathref="maven.compile.classpath" />
+                <mkdir dir="${build.webapps}/hiveserver2/WEB-INF" />
                 <jspcompiler uriroot="${src.webapps}/hiveserver2"
                   outputdir="${generated.sources}/java"
                   package="org.apache.hive.generated.hiveserver2"
-                  webxml="${build.webapps}/hiveserver2/WEB-INF/web.xml"/>
+                  webxml="${build.webapps}/hiveserver2/WEB-INF/web.xml" />
               </target>
             </configuration>
             <goals>
@@ -278,48 +284,48 @@
           </execution>
         </executions>
       </plugin>
-        <plugin>
-            <groupId>org.jamon</groupId>
-            <artifactId>jamon-maven-plugin</artifactId>
-            <executions>
-                <execution>
-                    <phase>generate-sources</phase>
-                    <goals>
-                        <goal>translate</goal>
-                    </goals>
-                    <configuration>
-                        <templateSourceDir>src/jamon</templateSourceDir>
-                        <templateOutputDir>target/generated-jamon</templateOutputDir>
-                    </configuration>
-                </execution>
-            </executions>
-        </plugin>
-        <!-- General plugins -->
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-eclipse-plugin</artifactId>
+      <plugin>
+        <groupId>org.jamon</groupId>
+        <artifactId>jamon-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>translate</goal>
+            </goals>
             <configuration>
-                <additionalProjectnatures>
-                    <projectnature>org.jamon.project.jamonnature</projectnature>
-                </additionalProjectnatures>
-                <buildcommands>
-                    <buildcommand>org.jamon.project.templateBuilder</buildcommand>
-                    <buildcommand>org.eclipse.jdt.core.javabuilder</buildcommand>
-                    <buildcommand>org.jamon.project.markerUpdater</buildcommand>
-                </buildcommands>
-                <additionalConfig>
-                    <file>
-                        <name>.settings/org.jamon.prefs</name>
-                        <content># now
-                            eclipse.preferences.version=1
-                            templateSourceDir=src/main/jamon
-                            templateOutputDir=target/generated-jamon
-                        </content>
-                    </file>
-                </additionalConfig>
+              <templateSourceDir>src/jamon</templateSourceDir>
+              <templateOutputDir>target/generated-jamon</templateOutputDir>
             </configuration>
-        </plugin>
-        <plugin>
+          </execution>
+        </executions>
+      </plugin>
+      <!-- General plugins -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-eclipse-plugin</artifactId>
+        <configuration>
+          <additionalProjectnatures>
+            <projectnature>org.jamon.project.jamonnature</projectnature>
+          </additionalProjectnatures>
+          <buildcommands>
+            <buildcommand>org.jamon.project.templateBuilder</buildcommand>
+            <buildcommand>org.eclipse.jdt.core.javabuilder</buildcommand>
+            <buildcommand>org.jamon.project.markerUpdater</buildcommand>
+          </buildcommands>
+          <additionalConfig>
+            <file>
+              <name>.settings/org.jamon.prefs</name>
+              <content># now
+                eclipse.preferences.version=1
+                templateSourceDir=src/main/jamon
+                templateOutputDir=target/generated-jamon
+              </content>
+            </file>
+          </additionalConfig>
+        </configuration>
+      </plugin>
+      <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-jar-plugin</artifactId>
         <executions>
